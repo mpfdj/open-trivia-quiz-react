@@ -1,17 +1,8 @@
 import React, {Component} from "react";
 import {Button, ListGroup, ListGroupItem} from "react-bootstrap";
 import Scorebox from "./Scorebox";
-
-const results = [];
-
-const style = {
-    correct: {
-        color: '#008000'
-    },
-    wrong: {
-        color: '#FF0000'
-    }
-}
+import Summary from "./Summary";
+import Results from "./Results";
 
 class Quiz extends Component {
     constructor(props) {
@@ -20,6 +11,8 @@ class Quiz extends Component {
             error: undefined,
             isLoaded: false,
             counter: 0,
+            results: [],
+            score: 0,
             data: []
         };
     }
@@ -45,9 +38,10 @@ class Quiz extends Component {
 
     checkAnswer = (answer, choice) => {
         if (choice === answer) {
-            results.push("✓");
+            this.state.results.push("✓");
+            this.state.score = this.state.score + 1
         } else {
-            results.push("X");
+            this.state.results.push("X");
         }
         this.setState({counter: this.state.counter + 1})
     }
@@ -61,42 +55,35 @@ class Quiz extends Component {
         } else {
             return (
                 <div>
+                    {/* Pass the whole state object here */}
+                    <Scorebox data={this.state}/>
+                    <Results results={this.state.results}/>
 
-                    <Scorebox data="test"/>
+                    {counter < data.length
+                        ? <div>
+                            <p>{data[counter].question}</p>
 
-                    {results.length === 0
-                        ? <div>&nbsp;</div>
+                            <ListGroup>
+                                {data[counter].choices.map((c, index) => {
+                                    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+                                    return (
+                                        // https://reactjs.org/docs/handling-events.html
+                                        // <ListGroupItem key={index} tag="button" action onClick={this.checkAnswer.bind(this, data[counter].answer, c)}>{c}</ListGroupItem>
+                                        <ListGroupItem key={index} variant="info" action onClick={(e) => this.checkAnswer(data[counter].answer, c, e)}>
+                                            <Button key={index} variant="primary">{alphabet[index]}</Button>
+                                            <span className="choice">{c}</span>
+                                        </ListGroupItem>
+                                    );
+                                })}
+                            </ListGroup></div>
                         : <div>
-                            {results.map((r, index) => {
-                                if (r === "✓") {
-                                    return <span key={index} style={style.correct}>{r}</span>;
-                                } else {
-                                    return <span key={index} style={style.wrong}>{r}</span>;
-                                }
-                            })}
+                            {/* Pass the whole state object here */}
+                            <Summary data={this.state}/>
                         </div>}
 
-                    <h3>{data[counter].category}</h3>
-                    <p>{data[counter].question}</p>
-
-                    <ListGroup>
-                        {data[counter].choices.map((c, index) => {
-                            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-                            return (
-                                // https://reactjs.org/docs/handling-events.html
-                                // <ListGroupItem key={index} tag="button" action onClick={this.checkAnswer.bind(this, data[counter].answer, c)}>{c}</ListGroupItem>
-                                <ListGroupItem key={index} variant="info" action onClick={(e) => this.checkAnswer(data[counter].answer, c, e)}>
-                                    <Button key={index} variant="primary">{alphabet[index]}</Button>
-                                    <span className="choice">{c}</span>
-                                </ListGroupItem>
-                            );
-                        })}
-                    </ListGroup>
                 </div>
             );
         }
-
-
     }
 }
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Button} from "react-bootstrap";
 
 class Navigation extends Component {
 
@@ -12,7 +13,7 @@ class Navigation extends Component {
             <div>
                 {this.state.categories.map((c, index) => {
                     return (
-                        <a key={index} href={c}>{c}&nbsp;</a>
+                        <Button key={index} variant="outline-primary" href={c}>{c}</Button>
                     );
                 })}
             </div>
