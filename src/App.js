@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Home from './components/Home';
 import Navigation from './components/Navigation';
-import OpenTriviaQuestionQuiz from "./components/OpenTriviaQuestionQuiz";
-
+import Quiz from "./components/Quiz";
+import './App.css'
 
 // https://stackoverflow.com/questions/46820682/how-do-i-reload-a-page-with-react-router
 // https://reactrouter.com/web/api/BrowserRouter
@@ -26,7 +26,7 @@ class App extends Component {
                         {this.state.categories.map((c, index) => {
                             return (
                                 // https://learnwithparam.com/blog/how-to-pass-props-in-react-router/
-                                <Route key={index} path={"/" + c} render={(props) => <OpenTriviaQuestionQuiz {...props} category={c} />} />
+                                <Route key={index} path={"/" + c} render={(props) => <Quiz {...props} category={c} />} />
                             );
                         })};
                         <Route component={Home}/>
