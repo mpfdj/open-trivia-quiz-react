@@ -18,7 +18,8 @@ class Quiz extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:10001/get-questions?category=" + this.props.category + "&amount=10")
+        let api_call = process.env.REACT_APP_API_ENDPOINT + "/quiz?category=" + this.props.category;
+        fetch(api_call)
             .then(res => res.json())
             .then(
                 (result) => {
