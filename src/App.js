@@ -19,20 +19,20 @@ class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
-                <div>
-                    <Navigation/>
-                    <Switch>
-                        {this.state.categories.map((c, index) => {
-                            return (
-                                // https://learnwithparam.com/blog/how-to-pass-props-in-react-router/
-                                <Route key={index} path={"/" + c} render={(props) => <Quiz {...props} category={c} />} />
-                            );
-                        })};
-                        <Route component={Home}/>
-                    </Switch>
-                </div>
-            </BrowserRouter>
+                <BrowserRouter>
+                    <div>
+                        <Navigation/>
+                        <Switch>
+                            {this.state.categories.map((c, index) => {
+                                return (
+                                    // https://learnwithparam.com/blog/how-to-pass-props-in-react-router/
+                                    <Route key={index} path={"/" + c} render={(props) => <Quiz {...props} category={c}/>}/>
+                                );
+                            })};
+                            <Route component={Home}/>
+                        </Switch>
+                    </div>
+                </BrowserRouter>
         );
     }
 }

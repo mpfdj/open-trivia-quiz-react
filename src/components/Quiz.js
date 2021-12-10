@@ -3,6 +3,7 @@ import {Button, ListGroup, ListGroupItem} from "react-bootstrap";
 import Scorebox from "./Scorebox";
 import Summary from "./Summary";
 import Results from "./Results";
+import styles from "./Quiz.module.css";
 
 class Quiz extends Component {
     constructor(props) {
@@ -70,9 +71,9 @@ class Quiz extends Component {
                                     return (
                                         // https://reactjs.org/docs/handling-events.html
                                         // <ListGroupItem key={index} tag="button" action onClick={this.checkAnswer.bind(this, data[counter].answer, c)}>{c}</ListGroupItem>
-                                        <ListGroupItem key={index} variant="info" action onClick={(e) => this.checkAnswer(data[counter].answer, c, e)}>
-                                            <Button key={index} variant="primary">{alphabet[index]}</Button>
-                                            <span className="choice">{c}</span>
+                                        <ListGroupItem key={index} variant="light" action onClick={(e) => this.checkAnswer(data[counter].answer, c, e)}>
+                                            <Button key={index} variant="outline-primary">{alphabet[index]}</Button>
+                                            <span className={styles.choice}>{c}</span>
                                         </ListGroupItem>
                                     );
                                 })}

@@ -15,7 +15,7 @@ class Summary extends Component {
             <div>
                 <h3>You got {score} out of {this.props.data.data.length} correct</h3>
                 <h3>{this.createScoreMessage(percent)}</h3>
-                <Button variant="primary" href={category}>Take again</Button>
+                <Button variant="outline-primary" href={category}>Take again</Button>
             </div>
         )
     }

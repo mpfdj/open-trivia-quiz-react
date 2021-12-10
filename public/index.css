@@ -1,0 +1,11 @@
+.title {
+    font-size: 100px;
+}
+
+.title-ruler {
+    height: 10px;
+    border-width:0;
+    color:black;
+    background-color:black;
+    margin-bottom: 50px;
+}
